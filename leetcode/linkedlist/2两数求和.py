@@ -16,53 +16,64 @@ class ListNode(object):
         self.val = x
         self.next = None
 
-class Solution(object):
-    def addTwoNumbers(self, l1, l2):
+def addTwoNodes( n1, n2):
+        if not n1 and not n2: # This cannot happen, ignore it
+            None
+        if not n1:
+            return n2.val
+        if not n2:
+            return n1.val
+        return n1.val + n2.val
+
+def addTwoNumbers( l1, l2):
         """
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
         """
-
-        l1_num = 0
-        l2_num = 0
-        l3_num = 0
-        i = 0
-
-        while(l1.next != None):
-            i = 0
-            l1_num = l1_num +  l1.val * pow(10,i)
-            l1 = l1.next
-            i = i + 1
-
-        while(l2.next != None):
-            i = 0
-            l2_num = l2_num + l2.val * pow(10,i)
-            l2 = l2.next
-            i = i + 1
-
-        l3_num = l1_num + l2_num
-
-        l3 = ListNode()
-
-        while(True):
-            i=0
-            if((l3_num / pow(10,i)) < 1):
-                break
-
-        while(l3.next == None):
-            twp = 0
-            if(i<0):
-                break
-            l3.val = l3.num / pow(10,i-1)
-            tmp = l3.num % pow(10,i-1)
-            l3 = l3.next
+        result = ListNode(0);
+        cur = result;
+        while l1 or l2:
+            cur.val += addTwoNodes(l1, l2)
+            if cur.val >= 10:
+                cur.val -= 10
+                cur.next = ListNode(1)
+            else: # Check if there is need to make the next node
+                if l1 and l1.next or l2 and l2.next:
+                    cur.next = ListNode(0)
+            cur = cur.next
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+        return result
 
 
 
+if __name__ == '__main__':
 
-l = [1,2,3]
-l1 = ListNode(l)
+    l = [1,2,3]
+    l2 = [4,5,6]
+    l5 = []
+    l1 = ListNode(l)
 
-while(l1.next != None):
     print(l1.val)
+
+    # while(l1.next != None):
+    #     print(l1.val)
+
+    l1 = ListNode(2)
+    l1.next = ListNode(4)
+    l1.next.next = ListNode(3)
+    # l1.next.next.next = ListNode(1)
+
+    l2 = ListNode(5)
+    l2.next = ListNode(6)
+    l2.next.next = ListNode(4)
+
+    l3 = addTwoNumbers(l1, l2)
+    print(l3.val)
+    print(l3.next.val)
+    print(l3.next.next.val)
+    # print(l3.next.next.next.val)
+    # print(l3.next.next.next.next.val)
