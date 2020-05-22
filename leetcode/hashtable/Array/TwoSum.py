@@ -23,10 +23,10 @@ class Solution(object):
             return False
 
         for i in range(len(nums)):
-            for j in range(i+1,len(nums)):
-                if(nums[i] + nums[j] == target):
-                    return [i,j]
-        return [-1,-1]
+            for j in range(i + 1, len(nums)):
+                if (nums[i] + nums[j] == target):
+                    return [i, j]
+        return [-1, -1]
 
     def twoSum1(self, nums, target):
         """
@@ -56,12 +56,10 @@ class Solution(object):
                 return [keys[target - v], i]
             else:
                 keys[v] = i
-        return [-1,-1]
+        return [-1, -1]
+
 
 if __name__ == '__main__':
     print('leetcode 1/ lintcode 56')
     # print(Solution.twoSum(Solution,[3,2,4],6))
-    print(Solution.twoSum1(Solution,[3,2,4],6))
-
-
-
+    print(Solution.twoSum1(Solution, [3, 2, 4], 6))
