@@ -38,8 +38,29 @@ class Solution(object):
         # 最后结果乘2别忘了
         return arr[n][n] * 2
 
+    def countPathNumTest(self, n):
+        """
+        :type n: int
+        :rtype: long
+        """
+        arr = np.zeros((50, 50), dtype=np.long)
+        for j in range(1,36):
+            arr[0][j] = 1
+            # 这里为了尝试我不信邪还是想用判断来决定对角线上的元素，导致我更改了一下循环条件，才能正常
+            # 这里面有一个小的问题就是 RuntimeWarning: overflow encountered in long_scalars（先忽略吧，有时间再去研究）
+            for i in range(1,j+1):
+                if i == j:
+                    arr[j][j] = arr[j - 1][j]
+                else:
+                    arr[i][j] = arr[i - 1][j] + arr[i][j - 1]
+        # 最后结果乘2别忘了
+        return arr[n][n] * 2
+
 
 if __name__ == '__main__':
-    print(Solution.countPathNum(Solution, 1))
-    print(Solution.countPathNum(Solution, 3))
-    print(Solution.countPathNum(Solution, 12))
+    # print(Solution.countPathNum(Solution, 1))
+    # print(Solution.countPathNum(Solution, 3))
+    # print(Solution.countPathNum(Solution, 12))
+
+    print(Solution.countPathNumTest(Solution, 12))
+
